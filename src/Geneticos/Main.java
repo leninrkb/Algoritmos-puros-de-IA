@@ -1,0 +1,40 @@
+package Geneticos;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        Algoritmo a = new Algoritmo();
+        List<Auto> autosGeneral = new ArrayList<>();
+        autosGeneral = Algoritmo.generarPoblacion(10);
+
+        List<Auto> autosInicial = new ArrayList<>();
+        autosInicial = Algoritmo.seleccionarPoblacionInicial(autosGeneral);
+
+        List<Auto> padres = new ArrayList<>();
+        padres = Algoritmo.seleccionarPadres(autosInicial);
+
+        List<Auto> hijos = new ArrayList<>();
+        hijos = Algoritmo.cruzar(padres);
+
+        autosInicial.remove(padres.get(0));
+        autosInicial.remove(padres.get(1));
+
+        hijos = Algoritmo.mutar(hijos);
+
+        autosInicial.add(hijos.get(0));
+        autosInicial.add(hijos.get(1));
+
+
+        System.out.println("hijo 1 -----------------------");
+        Algoritmo.imprimirRuta(hijos.get(0));
+        System.out.println(hijos.get(0).recorrido());
+
+        System.out.println("hijo 2 -----------------------");
+        Algoritmo.imprimirRuta(hijos.get(1));
+        System.out.println(hijos.get(1).recorrido());
+
+    }
+    
+}
