@@ -13,19 +13,40 @@ public class Main {
         autosInicial = Algoritmo.seleccionarPoblacionInicial(autosGeneral);
 
         List<Auto> padres = new ArrayList<>();
-        padres = Algoritmo.seleccionarPadres(autosInicial);
-
         List<Auto> hijos = new ArrayList<>();
-        hijos = Algoritmo.cruzar(padres);
 
-        autosInicial.remove(padres.get(0));
-        autosInicial.remove(padres.get(1));
+        int i = 0;
+        int record = 20;
 
-        hijos = Algoritmo.mutar(hijos);
+        do {
 
-        autosInicial.add(hijos.get(0));
-        autosInicial.add(hijos.get(1));
+            padres = Algoritmo.seleccionarPadres(autosInicial);
+            hijos = Algoritmo.cruzar(padres);
+            if (hijos.get(0).recorrido.size() <= record) {
+                break;
+            }
 
+            if (hijos.get(1).recorrido.size() <= record) {
+                break;
+            }
+
+            hijos = Algoritmo.mutar(hijos);
+
+            if (hijos.get(0).recorrido.size() <= record) {
+                break;
+            }
+
+            if (hijos.get(1).recorrido.size() <= record) {
+                break;
+            }
+
+            autosInicial.remove(padres.get(0));
+            autosInicial.remove(padres.get(1));
+
+            autosInicial.add(hijos.get(0));
+            autosInicial.add(hijos.get(1));
+
+        } while (i < 10);
 
         System.out.println("hijo 1 -----------------------");
         Algoritmo.imprimirRuta(hijos.get(0));
@@ -36,5 +57,5 @@ public class Main {
         System.out.println(hijos.get(1).recorrido());
 
     }
-    
+
 }

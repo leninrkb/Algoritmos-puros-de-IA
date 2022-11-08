@@ -11,9 +11,10 @@ public class Algoritmo {
         recorrido = new ArrayList<>();
     }
 
-    static List<Auto> mutar(List<Auto> hijos){
+    static List<Auto> mutar(List<Auto> hijos) {
         List<Auto> nuevos = new ArrayList<>();
-        Auto m = hijos.get(random(0, hijos.size()-1));
+        int rand = random(0, hijos.size() - 1);
+        Auto m = hijos.get(rand);
         Auto mutado = new Auto();
         hijos.remove(m);
         nuevos.add(hijos.get(0));
@@ -22,12 +23,13 @@ public class Algoritmo {
         int c = (int) Math.floor(m.recorrido.size() * vcorte[random(0, vcorte.length - 1)]);
         int corte = random(1, c);
 
+        System.out.println(m.recorrido.size());
         for (int i = 0; i < corte; i++) {
             mutado.recorrido.add(m.recorrido.get(i));
         }
         recorrido = new ArrayList<>();
-        generarRuta(mutado.recorrido.get(mutado.recorrido.size()-1));
-        for (int i = 0; i < vcorte.length; i++) {
+        generarRuta(mutado.recorrido.get(mutado.recorrido.size() - 1));
+        for (int i = 0; i < recorrido.size(); i++) {
             mutado.recorrido.add(recorrido.get(i));
         }
         nuevos.add(mutado);
@@ -44,79 +46,69 @@ public class Algoritmo {
         int l1 = padres.get(0).recorrido.size();
         int l2 = padres.get(1).recorrido.size();
         int corte = 0;
-        double[] vcorte = { 0.15, 0.20};
+        double[] vcorte = { 0.15, 0.20 };
 
         if (l1 < l2) {
             // l1
             int c = (int) Math.floor(l1 * vcorte[random(0, vcorte.length - 1)]);
-            corte = random(1, c);
+            corte = random(2, c);
+        } else {
+            Auto aux = new Auto();
+            aux = padres.get(0);
+            padres.set(0, padres.get(1));
+            padres.set(1, aux);
 
-            if (padres.get(0).recorrido.get(corte) == padres.get(1).recorrido.get(corte)) {
-                for (int i = 0; i < corte; i++) {
-                    h1.recorrido.add(padres.get(0).recorrido.get(i));
-                    h2.recorrido.add(padres.get(1).recorrido.get(i));
-                }
-                for (int i = corte; i < l2; i++) {
-                    h1.recorrido.add(padres.get(1).recorrido.get(i));
-                }
-                for (int i = corte; i < l1; i++) {
-                    h2.recorrido.add(padres.get(0).recorrido.get(i));
-                }
-            } else {
-                for (int i = corte; i < l2; i++) {
-                    if (padres.get(0).recorrido.get(corte) == padres.get(1).recorrido.get(i)) {
-                        for (int j = 0; j < corte; j++) {
-                            h1.recorrido.add(padres.get(0).recorrido.get(j));
-                        }
-                        for (int j = 0; j < i; j++) {
-                            h2.recorrido.add(padres.get(1).recorrido.get(j));
-                        }
-                        for (int j = i; j < l2; j++) {
-                            h1.recorrido.add(padres.get(1).recorrido.get(j));
-                        }
-                        for (int j = corte; j < l1; j++) {
-                            h2.recorrido.add(padres.get(0).recorrido.get(j));
-                        }
-                        break;
-                    }
-                }
+            l1 = padres.get(0).recorrido.size();
+            l2 = padres.get(1).recorrido.size();
+
+            if (l1 < l2) {
+                int c = (int) Math.floor(l1 * vcorte[random(0, vcorte.length - 1)]);
+                corte = random(1, c);
+            }
+
+        }
+
+        if (padres.get(0).recorrido.get(corte) == padres.get(1).recorrido.get(corte)) {
+            for (int i = 0; i < corte; i++) {
+                h1.recorrido.add(padres.get(0).recorrido.get(i));
+                h2.recorrido.add(padres.get(1).recorrido.get(i));
+            }
+            for (int i = corte; i < l2; i++) {
+                h1.recorrido.add(padres.get(1).recorrido.get(i));
+            }
+            for (int i = corte; i < l1; i++) {
+                h2.recorrido.add(padres.get(0).recorrido.get(i));
             }
         } else {
-            // l2
-            int c = (int) Math.floor(l2 * vcorte[random(0, vcorte.length - 1)]);
-            corte = random(1, c);
-
-            if (padres.get(1).recorrido.get(corte) == padres.get(0).recorrido.get(corte)) {
-                for (int i = 0; i < corte; i++) {
-                    h1.recorrido.add(padres.get(0).recorrido.get(i));
-                    h2.recorrido.add(padres.get(1).recorrido.get(i));
-                }
-                for (int i = corte; i < l2; i++) {
-                    h1.recorrido.add(padres.get(1).recorrido.get(i));
-                }
-                for (int i = corte; i < l1; i++) {
-                    h2.recorrido.add(padres.get(0).recorrido.get(i));
-                }
-            } else {
-                for (int i = 0; i < l1; i++) {
-                    if (padres.get(1).recorrido.get(corte) == padres.get(0).recorrido.get(i)) {
-                        for (int j = 0; j < corte; j++) {
-                            h1.recorrido.add(padres.get(1).recorrido.get(j));
-                        }
-                        for (int j = 0; j < i; j++) {
-                            h2.recorrido.add(padres.get(0).recorrido.get(j));
-                        }
-                        for (int j = i; j < l2; j++) {
-                            h1.recorrido.add(padres.get(0).recorrido.get(j));
-                        }
-                        for (int j = corte; j < l1; j++) {
-                            h2.recorrido.add(padres.get(1).recorrido.get(j));
-                        }
-                        break;
+            for (int i = corte; i < l2; i++) {
+                if (padres.get(0).recorrido.get(corte) == padres.get(1).recorrido.get(i)) {
+                    for (int j = 0; j < corte; j++) {
+                        h1.recorrido.add(padres.get(0).recorrido.get(j));
                     }
+                    for (int j = 0; j < i; j++) {
+                        h2.recorrido.add(padres.get(1).recorrido.get(j));
+                    }
+                    for (int j = i; j < l2; j++) {
+                        h1.recorrido.add(padres.get(1).recorrido.get(j));
+                    }
+                    for (int j = corte; j < l1; j++) {
+                        h2.recorrido.add(padres.get(0).recorrido.get(j));
+                    }
+                    break;
                 }
             }
-
+            for (int i = corte; i < l2; i++) {
+                for (int j = 0; j < corte; j++) {
+                    h1.recorrido.add(padres.get(0).recorrido.get(j));
+                }
+                for (int j = corte; j < l2; j++) {
+                    h1.recorrido.add(padres.get(1).recorrido.get(j));
+                }
+                break;
+            }
+            if (h2.recorrido.size() == 0) {
+                h2 = padres.get(0);
+            }
         }
 
         nuevos.add(h2);
@@ -230,7 +222,6 @@ public class Algoritmo {
 
     static Camino generarRuta(Camino c) {
         if (c.id == "c28") {
-            recorrido.add(c);
             return null;
         }
         Camino cc = Mapa.seleccionarMetodo(c);
