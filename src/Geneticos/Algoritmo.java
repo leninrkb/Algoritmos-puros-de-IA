@@ -23,7 +23,6 @@ public class Algoritmo {
         int c = (int) Math.floor(m.recorrido.size() * vcorte[random(0, vcorte.length - 1)]);
         int corte = random(1, c);
 
-        System.out.println(m.recorrido.size());
         for (int i = 0; i < corte; i++) {
             mutado.recorrido.add(m.recorrido.get(i));
         }

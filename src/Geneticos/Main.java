@@ -16,7 +16,7 @@ public class Main {
         List<Auto> hijos = new ArrayList<>();
 
         int i = 0;
-        int record = 20;
+        int record = 8;
 
         do {
 
@@ -45,8 +45,11 @@ public class Main {
 
             autosInicial.add(hijos.get(0));
             autosInicial.add(hijos.get(1));
-
-        } while (i < 10);
+            i++;
+            if (i%10 == 0) {
+                System.out.println(i);
+            }
+        } while (true);
 
         System.out.println("hijo 1 -----------------------");
         Algoritmo.imprimirRuta(hijos.get(0));
