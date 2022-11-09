@@ -3,50 +3,58 @@ package BusquedaNoInformada;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Main {
     public static void main(String[] args) {
         Auto inicial = new Auto();
         inicial.recorrido.add(new Camino(0,"c0"));
 
         List<Auto> estados = new ArrayList<>();
+        List<Auto> temp = new ArrayList<>();
+        List<Auto> arbol = new ArrayList<>();
         estados = Algoritmo.generarEstados(inicial);
 
-        List<Auto> nuevos = new ArrayList<>();
-        List<Auto> temp = new ArrayList<>();
-        int i = 0;
-        do{
-            for (Auto auto : estados) {
-                if (auto.recorrido.get(auto.recorrido.size()-1)==null) {
-                    break;
+        int itera = estados.size();
+        for (int i = 0; i < itera; i++) {
+            temp = Algoritmo.generarEstados(estados.get(i));
+            if (temp != null) {
+                for (int j = 0; j < temp.size(); j++) {
+                    if (!arbol.contains(temp.get(j))) {
+                        arbol.add(temp.get(j));
+                    }
                 }
-                nuevos = Algoritmo.generarEstados(auto);
-                for (Auto auto2 : nuevos) {
-                    temp.add(auto2);
+                if (i+1 >= itera) {
+                    estados.removeAll(estados);
+                    for (Auto auto : arbol) {
+                        estados.add(auto);
+                    }
+                    itera = estados.size();
                 }
-            }
-            if (nuevos==null) {
+            }else{
                 break;
             }
-            for (Auto auto2 : temp) {
-                if (!estados.contains(auto2)) {
-                    estados.add(auto2);
-                }
-            }
-            temp.removeAll(temp);
-            i++;
-        }while(true);
-
-        
-        List<Auto> soluciones = new ArrayList<>();
-        for (Auto auto : estados) {
-            List<Camino> c = auto.recorrido;
-            if (c.get(c.size()-1).id == "c28") {
-                Algoritmo.imprimirRuta(auto);
-                soluciones.add(auto);
-            }
+            
         }
 
-        System.out.println("soluciones: "+soluciones.size());
+        int j =0;
+        for (int i = 0; i < arbol.size(); i++) {
+            if (arbol.get(i).recorrido.get(arbol.get(i).recorrido.size()-1).id == "c26") {
+                Algoritmo.imprimirRuta(arbol.get(i));
+                System.out.print("{28}");
+                j++;
+            }
+            if (arbol.get(i).recorrido.get(arbol.get(i).recorrido.size()-1).id == "c27") {
+                Algoritmo.imprimirRuta(arbol.get(i));
+                System.out.print("{28}");
+                j++;
+            }
+            if (arbol.get(i).recorrido.get(arbol.get(i).recorrido.size()-1).id == "c28") {
+                Algoritmo.imprimirRuta(arbol.get(i));
+                j++;
+            }
+        }
+        System.out.println("soluciones: "+j);
+
 
     }
 }

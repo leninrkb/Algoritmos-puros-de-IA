@@ -30,11 +30,10 @@ public class Algoritmo {
     }
 
     static void imprimirRuta(Auto a) {
-        System.out.println("--- inicio ---");
+        System.out.println("\n\n--- inicio ---");
         for (int i = 0; i < a.recorrido.size(); i++) {
             System.out.print("{" + a.recorrido.get(i).id + "},");
         }
-        System.out.println("\n--- fin ---\n");
     }
 
     static void copiarLista(Auto p, Auto h){
