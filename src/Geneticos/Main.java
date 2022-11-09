@@ -16,6 +16,7 @@ public class Main {
         List<Auto> hijos = new ArrayList<>();
 
         int i = 0;
+        int div = 1;
         int record = 8;
 
         do {
@@ -46,7 +47,19 @@ public class Main {
             autosInicial.add(hijos.get(0));
             autosInicial.add(hijos.get(1));
             i++;
-            if (i%10 == 0) {
+            if (i > 100) {
+                div = 100;
+            }
+            if (i > 1000) {
+                div = 1000;
+            }
+            if (i > 10000) {
+                div = 10000;
+            }
+            if (i > 100000) {
+                div = 100000;
+            }
+            if (i%div == 0) {
                 System.out.println(i);
             }
         } while (true);
