@@ -23,7 +23,10 @@ public class Main {
                 estadosHijo.add(auto);
             }
             i++;
-            System.out.println(i);
+            if (i%1 == 0) {
+                System.out.println(i);
+                
+            }
         } while (true);
         System.out.println("nodos formados: "+estadosHijo.size());
         Algoritmo.imprimirRuta(b);

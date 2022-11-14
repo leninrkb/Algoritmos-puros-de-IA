@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Algoritmo a = new Algoritmo();
         List<Auto> autosGeneral = new ArrayList<>();
-        autosGeneral = Algoritmo.generarPoblacion(10);
+        autosGeneral = Algoritmo.generarPoblacion(30);
 
         List<Auto> autosInicial = new ArrayList<>();
         autosInicial = Algoritmo.seleccionarPoblacionInicial(autosGeneral);

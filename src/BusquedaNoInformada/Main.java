@@ -40,20 +40,23 @@ public class Main {
         for (int i = 0; i < arbol.size(); i++) {
             if (arbol.get(i).recorrido.get(arbol.get(i).recorrido.size()-1).id == "c26") {
                 Algoritmo.imprimirRuta(arbol.get(i));
-                System.out.print("{28}");
+                System.out.print("{28},");
+                System.out.print(arbol.get(i).longitud());
                 j++;
             }
             if (arbol.get(i).recorrido.get(arbol.get(i).recorrido.size()-1).id == "c27") {
                 Algoritmo.imprimirRuta(arbol.get(i));
-                System.out.print("{28}");
+                System.out.print("{28},");
+                System.out.print(arbol.get(i).longitud());
                 j++;
             }
             if (arbol.get(i).recorrido.get(arbol.get(i).recorrido.size()-1).id == "c28") {
                 Algoritmo.imprimirRuta(arbol.get(i));
+                System.out.print(arbol.get(i).longitud());
                 j++;
             }
         }
-        System.out.println("soluciones: "+j);
+        System.out.println("\n\n soluciones: "+j);
 
 
     }

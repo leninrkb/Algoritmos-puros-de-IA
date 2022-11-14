@@ -190,7 +190,7 @@ public class Algoritmo {
     public static List<Auto> seleccionarPoblacionInicial(List<Auto> autosGeneral) {
         List<Auto> nuevos = new ArrayList<>();
 
-        int[] c = { 4, 6 };
+        int[] c = { 4, 6 , 8};
         int rand = random(0, 1);
         int rand2 = 0;
         for (int i = 0; i < c[rand]; i++) {
