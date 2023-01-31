@@ -19,7 +19,7 @@ public class Algoritmo {
         hijos.remove(m);
         nuevos.add(hijos.get(0));
 
-        double[] vcorte = { 0.1, 0.15, 0.20 };
+        double[] vcorte = { 0.1, 0.15, 0.20};
         int c = (int) Math.floor(m.recorrido.size() * vcorte[random(0, vcorte.length - 1)]);
         int corte = random(1, c);
 
